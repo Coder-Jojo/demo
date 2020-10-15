@@ -56,6 +56,16 @@ node* newNode (int data)
     return Node;  
 }  
 
+void printPreorder(node* node) 
+{ 
+    if (node == NULL) 
+        return; 
+  
+    cout << node->data << " "; 
+    printPreorder(node->left);  
+    printPreorder(node->right); 
+}  
+
 int main()
 {
 	vector<int> vec;
@@ -77,5 +87,6 @@ indata >> num;
    }
    indata.close();
    node *root = buildTree(vec, 0, vec.size() - 1);  
+   printPreorder(root);
    return 0;
 }
