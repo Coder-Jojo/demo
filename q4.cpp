@@ -119,5 +119,7 @@ indata >> num;
    }
    indata.close();
    node *root = buildTree(vec, 0, vec.size() - 1);  
+   cout<<"The zig-zag traversal of the binary tree is: "<<endl;
+   zigzagtraversal(root);
    return 0;
 }
