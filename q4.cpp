@@ -56,7 +56,7 @@ node* newNode (int data)
     return Node;  
 }  
 
-void zizagtraversal(node* root) 
+void zigzagtraversal(node* root) 
 {  
   if (root==NULL) 
     return; 
