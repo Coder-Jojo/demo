@@ -56,6 +56,48 @@ node* newNode (int data)
     return Node;  
 }  
 
+void zizagtraversal(node* root) 
+{  
+  if (root==NULL) 
+    return; 
+ 
+  stack<node*> currentlevel; 
+  stack<node*> nextlevel; 
+
+  currentlevel.push(root); 
+
+  bool lefttoright = true; 
+  while (!currentlevel.empty()) { 
+ 
+    node* temp = currentlevel.top(); 
+    currentlevel.pop(); 
+
+    if (temp) { 
+
+      cout << temp->data << " "; 
+
+      if (lefttoright) { 
+        if (temp->left) 
+          nextlevel.push(temp->left); 
+        if (temp->right) 
+          nextlevel.push(temp->right); 
+      } 
+
+      else { 
+        if (temp->right) 
+          nextlevel.push(temp->right); 
+        if (temp->left) 
+          nextlevel.push(temp->left); 
+      } 
+    } 
+
+    if (currentlevel.empty()) { 
+      lefttoright = !lefttoright; 
+      swap(currentlevel, nextlevel); 
+    } 
+  } 
+} 
+
 int main()
 {
 	vector<int> vec;
