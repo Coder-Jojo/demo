@@ -66,6 +66,48 @@ void printPreorder(node* node)
     printPreorder(node->right); 
 }  
 
+void zigzagtraversal(node* root) 
+{  
+  if (root==NULL) 
+    return; 
+ 
+  stack<node*> currentlevel; 
+  stack<node*> nextlevel; 
+
+  currentlevel.push(root); 
+
+  bool lefttoright = true; 
+  while (!currentlevel.empty()) { 
+ 
+    node* temp = currentlevel.top(); 
+    currentlevel.pop(); 
+
+    if (temp) { 
+
+      cout << temp->data << " "; 
+
+      if (lefttoright) { 
+        if (temp->left) 
+          nextlevel.push(temp->left); 
+        if (temp->right) 
+          nextlevel.push(temp->right); 
+      } 
+
+      else { 
+        if (temp->right) 
+          nextlevel.push(temp->right); 
+        if (temp->left) 
+          nextlevel.push(temp->left); 
+      } 
+    } 
+
+    if (currentlevel.empty()) { 
+      lefttoright = !lefttoright; 
+      swap(currentlevel, nextlevel); 
+    } 
+  } 
+} 
+
 int main()
 {
 	vector<int> vec;
@@ -88,5 +130,6 @@ indata >> num;
    indata.close();
    node *root = buildTree(vec, 0, vec.size() - 1);  
    printPreorder(root);
+   zigzagtraversal(root);
    return 0;
 }
