@@ -56,6 +56,16 @@ node* newNode (int data)
     return Node;  
 }  
 
+void printPreorder(node* node) 
+{ 
+    if (node == NULL) 
+        return; 
+  
+    cout << node->data << " "; 
+    printPreorder(node->left);  
+    printPreorder(node->right); 
+}  
+
 void zigzagtraversal(node* root) 
 {  
   if (root==NULL) 
@@ -119,7 +129,7 @@ indata >> num;
    }
    indata.close();
    node *root = buildTree(vec, 0, vec.size() - 1);  
-   cout<<"The zig-zag traversal of the binary tree is: "<<endl;
+   printPreorder(root);
    zigzagtraversal(root);
    return 0;
 }
