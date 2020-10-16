@@ -108,6 +108,74 @@ void zigzagtraversal(node* root)
   } 
 } 
 
+int HeightOfTree(node* root) 
+{ 
+    if (root == NULL) 
+	{  return 0;} 
+  
+    int lheight = HeightOfTree(root->left); 
+    int rheight = HeightOfTree(root->right); 
+  
+    return max(lheight + 1, rheight + 1); 
+} 
+  
+void Print_Level_Right_To_Left(node* root, int level) 
+{ 
+    if (root == NULL) 
+	{return; }
+  
+    if (level == 1) 
+	{ cout << root->data << " "; }
+  
+    else if (level > 1) { 
+        Print_Level_Right_To_Left(root->right, level - 1); 
+        Print_Level_Right_To_Left(root->left, level - 1); 
+    } 
+} 
+  
+void Print_Level_Left_To_Right(node* root, int level) 
+{ 
+    if (root == NULL) 
+	{return;} 
+  
+    if (level == 1) 
+	{cout << root->data << " "; }
+  
+    else if (level > 1) { 
+        Print_Level_Left_To_Right(root->left, level - 1); 
+        Print_Level_Left_To_Right(root->right, level - 1); 
+    } 
+} 
+  
+void PrintReverseZigZag(node* root) 
+{ 
+    int flag = 1; 
+  
+    int height = HeightOfTree(root); 
+  
+    for (int i = height; i >= 1; i--) { 
+        if (flag == 1) { 
+            Print_Level_Right_To_Left(root, i); 
+            flag = 0; 
+        } 
+        else if (flag == 0) { 
+            Print_Level_Left_To_Right(root, i); 
+            flag = 1; 
+        } 
+    } 
+}
+void printPostorder(node* root) 
+{ 
+    if (root == NULL) 
+	{return;} 
+ 
+    printPostorder(root->left); 
+ 
+    printPostorder(root->right); 
+  
+    cout << root->data << " "; 
+}
+
 int main()
 {
 	vector<int> vec;
@@ -129,7 +197,18 @@ indata >> num;
    }
    indata.close();
    node *root = buildTree(vec, 0, vec.size() - 1);  
+   cout<<"The post-order traversal:"<<endl;
+   printPostorder(root);
+   cout<<endl;
+   cout<<"The pre-order traversal is"<<endl;
    printPreorder(root);
+   cout<<endl;
+   cout<<"The zig-zag traversal of the binary tree is: "<<endl;
    zigzagtraversal(root);
+   cout<<endl;
+   cout<<"The Reverse zig-zag traversal is:"<<endl;
+   PrintReverseZigZag(root);
+
+   
    return 0;
 }
